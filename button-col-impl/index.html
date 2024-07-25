@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Tags Learning</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        nav a {
+            margin: 0 10px;
+            color: #333;
+        }
+        
+        button, .download-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover, .download-button:hover {
+            background-color: #45a049;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>HTML Tags Learning</h1>
+
+<nav>
+    <h2>
+    <a href="table.html">Table Example</a>
+    <a href="misc.html">Html Tags</a>
+    <a href="signup.html">Sign Up</a>
+    </h2>
+</nav>
+
+<center>
+    <h2>Canvas Example</h2>
+    <p>Draw Something</p>
+    <br />
+    <canvas id="drawingCanvas" width="800" height="400"></canvas>
+    <br>
+    <a id="downloadCanvas" class="download-button" download="canvas.png">Download</a>
+    <button id="clearCanvas">Clear</button>
+</center>
+
+<script>
+    const canvas = document.getElementById('drawingCanvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+
+    canvas.addEventListener('mousedown', () => drawing = true);
+    canvas.addEventListener('mouseup', () => drawing = false);
+    canvas.addEventListener('mousemove', draw);
+
+    function draw(event) {
+        if (!drawing) return;
+        ctx.lineWidth = 5;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = 'black';
+
+        ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+    }
+
+    document.getElementById('clearCanvas').addEventListener('click', () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+    });
+
+    document.getElementById('downloadCanvas').addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.download = 'canvas-drawing.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    });
+</script>
+
+</body>
+</html>
