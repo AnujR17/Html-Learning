@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Div Element Experiment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        nav {
+            width: 100%;
+            background-color: #333;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        nav a, nav button {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            line-height: 24px; 
+            transition: background-color 0.3s ease; 
+        }
+        nav a:hover, nav button:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+
+        .shadowbox {
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            background-color: #ddd;
+            padding: 10px;
+            margin-bottom: 40px;
+        }
+
+        .flex-item {
+            background-color: #bbb;
+            padding: 20px;
+            margin: 5px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background-color: #eee;
+            padding: 10px;
+            margin-bottom: 40px;
+        }
+
+        .grid-item {
+            background-color: #ccc;
+            padding: 20px;
+            border: 1px solid #999;
+            text-align: center;
+        }
+
+        .relative-box {
+            position: relative;
+            padding: 20px;
+            background-color: #d4edda;
+            border: 1px solid #ccc;
+            margin-bottom: 40px;
+        }
+
+        .absolute-box {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background-color: #f8d7da;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .fixed-box {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #cce5ff;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .sticky-box {
+            position: sticky;
+            top: 0;
+            background-color: #e2e3e5;
+            padding: 20px;
+            border: 1px solid #ddd;
+            z-index: 1000;
+        }
+
+        .hidden-box {
+            display: none;
+        }
+
+        .scroll-container {
+            min-height: 200px; /* Adjusted to prevent stretching */
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .scroll-item {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #e1e1e1;
+            border: 1px solid #ccc;
+        }
+
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+            margin: 20px;
+        }
+
+        .tooltip-container .tooltip-text {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position the tooltip above the container */
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="draw.html"> Home </a>
+        <a href="area-map.html">Area-Maps </a>
+        <a href="table.html">Table </a>
+        <a href="misc.html">Html Tags </a>
+        <a href="signup.html">Sign Up </a>
+        <a href="d-tags.html">D-tags </a>
+        <a href="div.html">Divs </a>
+    </nav>
+
+    <div class="container">
+
+        <h1>Testing Different Div Styles</h1>
+
+        <div class="section shadowbox">
+            <h2>Shadowbox Effect</h2>
+            <p>Just testing a simple shadow effect here.</p>
+        </div>
+
+        <div class="section flex-container">
+            <div class="flex-item">Item 1</div>
+            <div class="flex-item">Item 2</div>
+            <div class="flex-item">Item 3</div>
+            
+        </div>
+        <div class="section flex-container">
+            <div class="flex-item">Item 1</div>
+            <div class="flex-item">Item 2</div>
+            <div class="flex-item">Item 3</div>
+            <div class="flex-item">Item 4</div>
+            <div class="flex-item">Item 5</div>
+            <div class="flex-item">Item 6</div>
+            
+        </div>
+
+        <div class="section grid-container">
+            <div class="grid-item">Grid 1</div>
+            <div class="grid-item">Grid 2</div>
+            <div class="grid-item">Grid 3</div>
+            <div class="grid-item">Grid 4</div>
+            <div class="grid-item">Grid 5</div>
+            <div class="grid-item">Grid 6</div>
+
+        </div>
+
+        <div class="section relative-box">
+            <div class="absolute-box">Absolute Box</div>
+            <p>This box is relatively positioned. And has an absolutely positioned box inside.</p>
+        </div>
+
+        <div class="section fixed-box">
+            <p>Fixed position box. Stays at the bottom left as scrolled upon.</p>
+        </div>
+
+        <div class="section sticky-box">
+            <p>Sticky position box. Sticks to the top when scrolling, till its container is out of view.</p>
+        </div>
+
+        <div class="section hidden-box">
+            <p>This box is hidden. Not displayed at all.</p>
+        </div>
+
+        <div class="scroll-container">
+            <h2>Scrollable Area</h2>
+            <p>Trying out a container with lots of content to make it scrollable.</p>
+            
+            <div class="scroll-item">Scroll 1</div>
+            <div class="scroll-item">Scroll 2</div>
+            <div class="scroll-item">Scroll 3</div>
+            <div class="scroll-item">Scroll 4</div>
+            <div class="scroll-item">Scroll 5</div>
+            <div class="scroll-item">Scroll 6</div>
+            <div class="scroll-item">Scroll 7</div>
+            <div class="scroll-item">Scroll 8</div>
+        </div>
+    </div>
+
+</body>
+</html>

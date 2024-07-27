@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML D-Tags</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+        }
+        nav {
+            width: 100%;
+            background-color: #333;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        nav a, nav button {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            line-height: 24px; 
+            transition: background-color 0.3s ease; 
+        }
+        nav a:hover, nav button:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding-left: 20px;
+        }
+        .section h2 {
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+        del {
+            color: red;
+        }
+        dialog {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="draw.html"> Home </a>
+        <a href="area-map.html">Area-Maps </a>
+        <a href="table.html">Table </a>
+        <a href="misc.html">Html Tags </a>
+        <a href="signup.html">Sign Up </a>
+        <a href="d-tags.html">D-tags </a>
+        <a href="div.html">Divs </a>
+    </nav>
+
+    <div class="section">
+        <h2>Datalist Tag</h2>
+        <label for="browsers">Select browser:</label>
+        <input list="browsers" id="browser" name="browser" placeholder="Type to see suggestions...">
+        <datalist id="browsers">
+            <option value="Chrome">
+            <option value="Firefox">
+            <option value="Safari">
+            <option value="Edge">
+            <option value="Opera">
+            <option value="Internet Explorer">
+        </datalist>
+        <p>This input field shows suggestions from the <code>&lt;datalist&gt;</code> as typed.</p>
+    </div>
+
+    <div class="section">
+        <h2>Description List</h2>
+        <dl>
+            <dt>HTML</dt>
+            <dd>Markup language for web pages. </dd>
+            <dt>CSS</dt>
+            <dd>Style sheet language to make HTML look good. </dd>
+            <dt>JavaScript</dt>
+            <dd>Programming language for interactivity. </dd>
+        </dl>
+        <p>Used <code>&lt;dl&gt;</code> here to list terms and their explanations.</p>
+    </div>
+
+    <div class="section">
+        <h2>Deleted Text</h2>
+        <p>Here's some original text. <del>This text is deleted now.</del> Shows changes or removals in the document.</p>
+    </div>
+
+    <div class="section">
+        <h2>Details Tag</h2>
+        <details>
+            <summary>Click to reveal more info</summary>
+            <p>Additional details are hidden by default. Clicking the summary shows more info.</p>
+            <ul>
+                <li>Detail A</li>
+                <li>Detail B</li>
+                <li>Detail C</li>
+            </ul>
+        </details>
+        <p>The <code>&lt;details&gt;</code> tag is for expandable content.</p>
+    </div>
+
+    <div class="section">
+        <h2>Definition Tag</h2>
+        <p>The <dfn>HyperText Markup Language</dfn> (HTML) is the main language for web pages. The term "HTML" is being defined here for the first time.</p>
+        <p><code>&lt;dfn&gt;</code> highlights the first use of a term.</p>
+    </div>
+
+    <div class="section">
+        <h2>Dialog Tag</h2>
+        <button onclick="showDialog()">Open Dialog</button>
+        <dialog id="myDialog">
+            <form method="dialog">
+                <p>This is a dialog box. </p>
+                <menu>
+                    <button value="cancel">Cancel</button>
+                    <button value="confirm">Confirm</button>
+                </menu>
+            </form>
+        </dialog>
+        <p>Click the button to see the dialog in action.</p>
+    </div>
+
+    <script>
+        function showDialog() {
+            document.getElementById('myDialog').showModal();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        nav {
+            width: 100%;
+            background-color: #333;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        nav a, nav button {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            line-height: 24px; 
+            transition: background-color 0.3s ease; 
+        }
+        nav a:hover, nav button:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        button, input[type="color"], input[type="range"] {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover, input[type="color"]:hover, input[type="range"]:hover {
+            background-color: #45a049;
+        }
+        canvas {
+            border: 2px solid #000;
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .controls div {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .buttons button {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+        .buttons svg {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="draw.html"> Home </a>
+    <a href="area-map.html">Area-Maps </a>
+    <a href="table.html">Table </a>
+    <a href="misc.html">Html Tags </a>
+    <a href="signup.html">Sign Up </a>
+    <a href="d-tags.html">D-tags </a>
+    <a href="div.html">Divs </a>
+</nav>
+
+<h1> Canvas Drawing Board</h1>
+
+<div class="controls">
+    <div title="Select Brush Size">
+        <label for="brushSize">Brush Size:</label>
+        <input type="range" id="brushSize" name="brushSize" min="1" max="20" value="5">
+    </div>
+    <div title="Select Brush Color">
+        <label for="brushColor">Brush Color:</label>
+        <input type="color" id="brushColor" name="brushColor" value="#000000">
+    </div>
+    <div title="Select Canvas Background Color">
+        <label for="canvasBgColor">Canvas Background:</label>
+        <input type="color" id="canvasBgColor" name="canvasBgColor" value="#ffffff">
+    </div>
+</div>
+
+<canvas id="drawingCanvas" width="800" height="400"></canvas>
+
+<div class="buttons">
+    <button id="downloadCanvas" title="Download Canvas Drawing">
+        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="Interface / Download">
+                <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+        </svg> 
+        Download
+    </button>
+    
+    <button id="clearCanvas" title="Clear Canvas Drawing">
+        <svg fill="#000000" width="24px" height="24px" viewBox="-1.5 -2.5 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-rubber">
+            <path d='M12.728 12.728L8.485 8.485l-5.657 5.657 2.122 2.121a3 3 0 0 0 4.242 0l3.536-3.535zM11.284 17H14a1 1 0 0 1 0 2H3a1 1 0 0 1-.133-1.991l-1.453-1.453a2 2 0 0 1 0-2.828L12.728 1.414a2 2 0 0 1 2.828 0L19.8 5.657a2 2 0 0 1 0 2.828L11.284 17z'/>
+        </svg>
+        Clear
+    </button>
+</div>
+
+<script>
+    const canvas = document.getElementById('drawingCanvas');
+    const ctx = canvas.getContext('2d');
+    const brushSize = document.getElementById('brushSize');
+    const brushColor = document.getElementById('brushColor');
+    const canvasBgColor = document.getElementById('canvasBgColor');
+    let drawing = false;
+
+    
+    ctx.fillStyle = canvasBgColor.value;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    
+    canvas.addEventListener('mousedown', () => drawing = true);
+    canvas.addEventListener('mouseup', () => {
+        drawing = false;
+        ctx.beginPath();
+    });
+    canvas.addEventListener('mousemove', draw);
+
+    brushSize.addEventListener('input', () => {
+        ctx.lineWidth = brushSize.value;
+    });
+
+    brushColor.addEventListener('input', () => {
+        ctx.strokeStyle = brushColor.value;
+    });
+
+    canvasBgColor.addEventListener('input', () => {
+        ctx.fillStyle = canvasBgColor.value;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    });
+
+    document.getElementById('clearCanvas').addEventListener('click', () => {
+        if (confirm("Are you sure you want to clear the canvas?")) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#ffffff";  
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+    });
+
+    document.getElementById('downloadCanvas').addEventListener('click', () => {
+        if (confirm("Do you want to download the canvas drawing?")) {
+        const link = document.createElement('a');
+        link.download = 'canvas-drawing.png';
+        link.href = canvas.toDataURL();
+        link.click();
+        }               
+    });
+    function draw(event) {
+    if (!drawing) return;
+    ctx.lineWidth = brushSize.value;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = brushColor.value;
+
+    ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+}
+</script>
+</body>
+</html>
+
