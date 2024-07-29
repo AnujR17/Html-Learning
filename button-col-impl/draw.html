@@ -38,7 +38,7 @@
         h1 {
             margin-top: 20px;
         }
-        button, input[type="color"], input[type="range"] {
+        button, input[type="color"], input[type="range"], input[type="file"] {
             background-color: #4CAF50;
             border: none;
             color: white;
@@ -51,7 +51,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        button:hover, input[type="color"]:hover, input[type="range"]:hover {
+        button:hover, input[type="color"]:hover, input[type="range"]:hover, input[type="file"]:hover {
             background-color: #45a049;
         }
         canvas {
@@ -112,11 +112,27 @@
         <label for="canvasBgColor">Canvas Background:</label>
         <input type="color" id="canvasBgColor" name="canvasBgColor" value="#ffffff">
     </div>
+    <div title="Upload Image">
+        <label for="uploadImage">Upload Image:</label>
+        <input type="file" id="uploadImage" accept="image/*">
+    </div>
 </div>
 
 <canvas id="drawingCanvas" width="800" height="400"></canvas>
 
 <div class="buttons">
+    <button id="undo" title="Undo">
+        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 4L4 10L10 16M4 10H20C21.1046 10 22 10.8954 22 12C22 13.1046 21.1046 14 20 14H16" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Undo
+    </button>
+    <button id="redo" title="Redo">
+        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 4L20 10L14 16M20 10H4C2.89543 10 2 10.8954 2 12C2 13.1046 2.89543 14 4 14H8" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Redo
+    </button>
     <button id="downloadCanvas" title="Download Canvas Drawing">
         <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="Interface / Download">
@@ -140,11 +156,17 @@
     const brushSize = document.getElementById('brushSize');
     const brushColor = document.getElementById('brushColor');
     const canvasBgColor = document.getElementById('canvasBgColor');
+    const uploadImage = document.getElementById('uploadImage');
     let drawing = false;
+    let undoStack = [];
+    let redoStack = [];
 
     
     ctx.fillStyle = canvasBgColor.value;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    
+    canvas.addEventListener('mousedown', saveState);
 
     
     canvas.addEventListener('mousedown', () => drawing = true);
@@ -167,6 +189,17 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     });
 
+    uploadImage.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const img = new Image();
+            img.onload = () => {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            };
+            img.src = URL.createObjectURL(file);
+        }
+    });
+
     document.getElementById('clearCanvas').addEventListener('click', () => {
         if (confirm("Are you sure you want to clear the canvas?")) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -177,24 +210,56 @@
 
     document.getElementById('downloadCanvas').addEventListener('click', () => {
         if (confirm("Do you want to download the canvas drawing?")) {
-        const link = document.createElement('a');
-        link.download = 'canvas-drawing.png';
-        link.href = canvas.toDataURL();
-        link.click();
-        }               
+            const link = document.createElement('a');
+            link.download = 'canvas-drawing.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
     });
-    function draw(event) {
-    if (!drawing) return;
-    ctx.lineWidth = brushSize.value;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = brushColor.value;
 
-    ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-}
+    document.getElementById('undo').addEventListener('click', () => {
+        if (undoStack.length > 0) {
+            redoStack.push(canvas.toDataURL());
+            const imgData = undoStack.pop();
+            const img = new Image();
+            img.onload = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+            };
+            img.src = imgData;
+        }
+    });
+
+    document.getElementById('redo').addEventListener('click', () => {
+        if (redoStack.length > 0) {
+            undoStack.push(canvas.toDataURL());
+            const imgData = redoStack.pop();
+            const img = new Image();
+            img.onload = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+            };
+            img.src = imgData;
+        }
+    });
+
+    function saveState() {
+        undoStack.push(canvas.toDataURL());
+        redoStack.length = 0;
+    }
+
+    function draw(event) {
+        if (!drawing) return;
+        ctx.lineWidth = brushSize.value;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = brushColor.value;
+
+        ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+    }
 </script>
+
 </body>
 </html>
-
