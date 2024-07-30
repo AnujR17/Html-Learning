@@ -7,33 +7,92 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0px;
+            margin: 0;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            height: 100vh;
+            overflow-x: hidden;
         }
         nav {
             width: 100%;
             background-color: #333;
             overflow: hidden;
-            margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
         }
-        nav a, nav button {
-            float: left;
+        nav a {
             display: block;
             color: #f2f2f2;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
             font-size: 17px;
-            line-height: 24px; 
-            transition: background-color 0.3s ease; 
         }
-        nav a:hover, nav button:hover {
+        nav a:hover {
             background-color: #ddd;
             color: black;
+        }
+        #openSidebar {
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            left: 15px;
+            top: 50px;
+            z-index: 2;
+        }
+        .sidebar {
+            height: calc(100% - 50px);
+            width: 250px;
+            position: fixed;
+            z-index: 1;
+            top: 47px;
+            left: -250px;
+            background-color: #111;
+            overflow-y: auto; 
+            transition: 0.5s;
+            padding-top: 10px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+            color: #f2f2f2;
+        }
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 15px;
+            font-size: 36px;
+            cursor: pointer;
+            color: #818181;
+        }
+        .sidebar .undo-redo {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 10px 15px;
+        }
+        .sidebar .undo-redo button {
+            margin: 0;
+        }
+        .sidebar .controls {
+            padding: 10px 15px;
+        }
+        .sidebar .controls label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .sidebar .controls input {
+            display: block;
+            margin-bottom: 10px;
+            max-width: 100%;
+        }
+        #main {
+            transition: margin-left 0.5s;
+            padding: 16px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
         }
         h1 {
             margin-top: 20px;
@@ -50,6 +109,7 @@
             margin: 4px 2px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            max-width: 100%; 
         }
         button:hover, input[type="color"]:hover, input[type="range"]:hover, input[type="file"]:hover {
             background-color: #45a049;
@@ -57,18 +117,8 @@
         canvas {
             border: 2px solid #000;
             margin-bottom: 20px;
-        }
-        .controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-            width: 100%;
-        }
-        .controls div {
-            display: flex;
-            align-items: center;
-            margin-right: 20px;
+            max-width: 100%;
+            height: auto;
         }
         .buttons {
             display: flex;
@@ -88,66 +138,73 @@
 <body>
 
 <nav>
-    <a href="draw.html"> Home </a>
-    <a href="area-map.html">Area-Maps </a>
-    <a href="table.html">Table </a>
-    <a href="misc.html">Html Tags </a>
-    <a href="signup.html">Sign Up </a>
-    <a href="d-tags.html">D-tags </a>
-    <a href="div.html">Divs </a>
+    <a href="draw.html">Home</a>
+    <a href="area-map.html">Area-Maps</a>
+    <a href="table.html">Table</a>
+    <a href="misc.html">Html Tags</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="d-tags.html">D-tags</a>
+    <a href="div.html">Divs</a>
+    <a href="contact.html">Contact Me </a>
 </nav>
+<div id="openSidebar">☰</div>
 
-<h1> Canvas Drawing Board</h1>
-
-<div class="controls">
-    <div title="Select Brush Size">
-        <label for="brushSize">Brush Size:</label>
-        <input type="range" id="brushSize" name="brushSize" min="1" max="20" value="5">
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <div class="undo-redo">
+        <button id="undo" title="Undo">
+            <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 4L4 10L10 16M4 10H20C21.1046 10 22 10.8954 22 12C22 13.1046 21.1046 14 20 14H16" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Undo
+        </button>
+        <button id="redo" title="Redo">
+            <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 4L20 10L14 16M20 10H4C2.89543 10 2 10.8954 2 12C2 13.1046 2.89543 14 4 14H8" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Redo
+        </button>
     </div>
-    <div title="Select Brush Color">
-        <label for="brushColor">Brush Color:</label>
-        <input type="color" id="brushColor" name="brushColor" value="#000000">
-    </div>
-    <div title="Select Canvas Background Color">
-        <label for="canvasBgColor">Canvas Background:</label>
-        <input type="color" id="canvasBgColor" name="canvasBgColor" value="#ffffff">
-    </div>
-    <div title="Upload Image">
-        <label for="uploadImage">Upload Image:</label>
-        <input type="file" id="uploadImage" accept="image/*">
+    <div class="controls">
+        <div title="Select Brush Size">
+            <label for="brushSize">Brush Size:</label>
+            <input type="range" id="brushSize" name="brushSize" min="1" max="20" value="5">
+        </div>
+        <div title="Select Brush Color">
+            <label for="brushColor">Brush Color:</label>
+            <input type="color" id="brushColor" name="brushColor" value="#000000">
+        </div>
+        <div title="Select Canvas Background Color">
+            <label for="canvasBgColor">Canvas Background:</label>
+            <input type="color" id="canvasBgColor" name="canvasBgColor" value="#ffffff">
+        </div>
+        <div title="Upload Image">
+            <label for="uploadImage">Upload Image:</label>
+            <input type="file" id="uploadImage" accept="image/*">
+        </div>
     </div>
 </div>
 
-<canvas id="drawingCanvas" width="800" height="400"></canvas>
+<div id="main">
+    <h1>Canvas Drawing Board</h1>
+    <canvas id="drawingCanvas"></canvas>
 
-<div class="buttons">
-    <button id="undo" title="Undo">
-        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 4L4 10L10 16M4 10H20C21.1046 10 22 10.8954 22 12C22 13.1046 21.1046 14 20 14H16" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Undo
-    </button>
-    <button id="redo" title="Redo">
-        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 4L20 10L14 16M20 10H4C2.89543 10 2 10.8954 2 12C2 13.1046 2.89543 14 4 14H8" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Redo
-    </button>
-    <button id="downloadCanvas" title="Download Canvas Drawing">
-        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="Interface / Download">
-                <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-        </svg> 
-        Download
-    </button>
-    
-    <button id="clearCanvas" title="Clear Canvas Drawing">
-        <svg fill="#000000" width="24px" height="24px" viewBox="-1.5 -2.5 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-rubber">
-            <path d='M12.728 12.728L8.485 8.485l-5.657 5.657 2.122 2.121a3 3 0 0 0 4.242 0l3.536-3.535zM11.284 17H14a1 1 0 0 1 0 2H3a1 1 0 0 1-.133-1.991l-1.453-1.453a2 2 0 0 1 0-2.828L12.728 1.414a2 2 0 0 1 2.828 0L19.8 5.657a2 2 0 0 1 0 2.828L11.284 17z'/>
-        </svg>
-        Clear
-    </button>
+    <div class="buttons">
+        <button id="downloadCanvas" title="Download Canvas Drawing">
+            <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="Interface / Download">
+                    <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+            </svg> 
+            Download
+        </button>
+        <button id="clearCanvas" title="Clear Canvas Drawing">
+            <svg fill="#000000" width="24px" height="24px" viewBox="-1.5 -2.5 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-rubber">
+                <path d='M12.728 12.728L8.485 8.485l-5.657 5.657 2.122 2.121a3 3 0 0 0 4.242 0l3.536-3.535zM11.284 17H14a1 1 0 0 1 0 2H3a1 1 0 0 1-.133-1.991l-1.453-1.453a2 2 0 0 1 0-2.828L12.728 1.414a2 2 0 0 1 2.828 0L19.8 5.657a2 2 0 0 1 0 2.828L11.284 17z'/>
+            </svg>
+            Clear
+        </button>
+    </div>
 </div>
 
 <script>
@@ -156,109 +213,154 @@
     const brushSize = document.getElementById('brushSize');
     const brushColor = document.getElementById('brushColor');
     const canvasBgColor = document.getElementById('canvasBgColor');
+    const undoBtn = document.getElementById('undo');
+    const redoBtn = document.getElementById('redo');
     const uploadImage = document.getElementById('uploadImage');
-    let drawing = false;
-    let undoStack = [];
-    let redoStack = [];
-
+    const downloadCanvas = document.getElementById('downloadCanvas');
+    const clearCanvas = document.getElementById('clearCanvas');
     
+
+    canvas.width = window.innerWidth * 0.8;
+    canvas.height = window.innerHeight * 0.6;
     ctx.fillStyle = canvasBgColor.value;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    
-    canvas.addEventListener('mousedown', saveState);
+    let drawing = false;
+    let history = [];
+    let historyStep = -1;
+    let redoHistory = [];
 
-    
-    canvas.addEventListener('mousedown', () => drawing = true);
-    canvas.addEventListener('mouseup', () => {
-        drawing = false;
-        ctx.beginPath();
-    });
-    canvas.addEventListener('mousemove', draw);
-
-    brushSize.addEventListener('input', () => {
-        ctx.lineWidth = brushSize.value;
-    });
-
-    brushColor.addEventListener('input', () => {
-        ctx.strokeStyle = brushColor.value;
-    });
-
-    canvasBgColor.addEventListener('input', () => {
-        ctx.fillStyle = canvasBgColor.value;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-    });
-
-    uploadImage.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const img = new Image();
-            img.onload = () => {
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            };
-            img.src = URL.createObjectURL(file);
+    function addHistory() {
+        if (historyStep < history.length - 1) {
+            history = history.slice(0, historyStep + 1);
         }
-    });
-
-    document.getElementById('clearCanvas').addEventListener('click', () => {
-        if (confirm("Are you sure you want to clear the canvas?")) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#ffffff";  
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-    });
-
-    document.getElementById('downloadCanvas').addEventListener('click', () => {
-        if (confirm("Do you want to download the canvas drawing?")) {
-            const link = document.createElement('a');
-            link.download = 'canvas-drawing.png';
-            link.href = canvas.toDataURL();
-            link.click();
-        }
-    });
-
-    document.getElementById('undo').addEventListener('click', () => {
-        if (undoStack.length > 0) {
-            redoStack.push(canvas.toDataURL());
-            const imgData = undoStack.pop();
-            const img = new Image();
-            img.onload = () => {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(img, 0, 0);
-            };
-            img.src = imgData;
-        }
-    });
-
-    document.getElementById('redo').addEventListener('click', () => {
-        if (redoStack.length > 0) {
-            undoStack.push(canvas.toDataURL());
-            const imgData = redoStack.pop();
-            const img = new Image();
-            img.onload = () => {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(img, 0, 0);
-            };
-            img.src = imgData;
-        }
-    });
-
-    function saveState() {
-        undoStack.push(canvas.toDataURL());
-        redoStack.length = 0;
+        history.push(canvas.toDataURL());
+        historyStep++;
+        redoHistory = [];
     }
 
-    function draw(event) {
+    function loadHistory(step) {
+        const img = new Image();
+        img.src = history[step];
+        img.onload = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+        };
+    }
+
+    function startPosition(e) {
+        drawing = true;
+        draw(e);
+    }
+
+    function endPosition() {
+        if (drawing) {
+            drawing = false;
+            ctx.beginPath();
+            addHistory();
+        }
+    }
+
+    function draw(e) {
         if (!drawing) return;
         ctx.lineWidth = brushSize.value;
         ctx.lineCap = 'round';
         ctx.strokeStyle = brushColor.value;
-
-        ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+        const rect = canvas.getBoundingClientRect();
+        ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
         ctx.stroke();
         ctx.beginPath();
-        ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+        ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
     }
+
+    function openNav() {
+        document.getElementById("mySidebar").style.left = "0";
+        document.getElementById("main").style.marginLeft = "250px";
+        canvas.width = window.innerWidth * 0.6;
+        canvas.height = window.innerHeight * 0.6;
+        loadHistory(historyStep);
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.left = "-250px";
+        document.getElementById("main").style.marginLeft = "0";
+        canvas.width = window.innerWidth * 0.8;
+        canvas.height = window.innerHeight * 0.6;
+        loadHistory(historyStep);
+    }
+
+    function undo() {
+        if (historyStep > 0) {
+            historyStep--;
+            loadHistory(historyStep);
+        }
+    }
+
+    function redo() {
+        if (historyStep < history.length - 1) {
+            historyStep++;
+            loadHistory(historyStep);
+        }
+    }
+
+    function uploadImg(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                addHistory();
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function download() {
+        const link = document.createElement('a');
+        link.download = 'drawing.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    }
+
+    function clear() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = canvasBgColor.value;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        addHistory();
+    }
+
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', endPosition);
+    canvas.addEventListener('mousemove', draw);
+
+    brushSize.addEventListener('change', () => ctx.lineWidth = brushSize.value);
+    brushColor.addEventListener('change', () => ctx.strokeStyle = brushColor.value);
+    canvasBgColor.addEventListener('change', () => {
+        ctx.fillStyle = canvasBgColor.value;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        addHistory();
+    });
+    undoBtn.addEventListener('click', undo);
+    redoBtn.addEventListener('click', redo);
+    uploadImage.addEventListener('change', uploadImg);
+    downloadCanvas.addEventListener('click', download);
+    clearCanvas.addEventListener('click', clear);
+
+    document.getElementById("openSidebar").addEventListener('click', openNav);
+    document.querySelector('.closebtn').addEventListener('click', closeNav);
+
+    window.addEventListener('resize', () => {
+        if (document.getElementById("mySidebar").style.left === "0px") {
+            canvas.width = window.innerWidth * 0.6;
+        } else {
+            canvas.width = window.innerWidth * 0.8;
+        }
+        canvas.height = window.innerHeight * 0.6;
+        loadHistory(historyStep);
+    });
 </script>
 
 </body>
