@@ -38,18 +38,18 @@
             cursor: pointer;
             position: absolute;
             left: 15px;
-            top: 50px;
+            top: 15px;
             z-index: 2;
         }
         .sidebar {
             height: calc(100% - 50px);
-            width: 250px;
+            width: 330px;
             position: fixed;
             z-index: 1;
             top: 47px;
-            left: -250px;
+            left: -330px;
             background-color: #111;
-            overflow-y: auto; 
+            overflow-y: hidden;
             transition: 0.5s;
             padding-top: 10px;
             box-shadow: 2px 0 5px rgba(0,0,0,0.2);
@@ -109,7 +109,7 @@
             margin: 4px 2px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            max-width: 100%; 
+            max-width: 100%;
         }
         button:hover, input[type="color"]:hover, input[type="range"]:hover, input[type="file"]:hover {
             background-color: #45a049;
@@ -119,6 +119,7 @@
             margin-bottom: 20px;
             max-width: 100%;
             height: auto;
+            cursor: crosshair;
         }
         .buttons {
             display: flex;
@@ -133,6 +134,10 @@
         .buttons svg {
             margin-right: 5px;
         }
+        .eraser-toggle {
+            display: block;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -145,7 +150,7 @@
     <a href="signup.html">Sign Up</a>
     <a href="d-tags.html">D-tags</a>
     <a href="div.html">Divs</a>
-    <a href="contact.html">Contact Me </a>
+    <a href="contact.html">Contact Me</a>
 </nav>
 <div id="openSidebar">☰</div>
 
@@ -182,6 +187,18 @@
             <label for="uploadImage">Upload Image:</label>
             <input type="file" id="uploadImage" accept="image/*">
         </div>
+        <div class="eraser-toggle">
+            <button id="eraserToggle" title="Toggle Eraser">
+                <svg fill="#000000" width="24px" height="24px" viewBox="-1.5 -2.5 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-rubber">
+                    <path d='M12.728 12.728L8.485 8.485l-5.657 5.657 2.122 2.121a3 3 0 0 0 4.242 0l3.536-3.535zM11.284 17H14a1 1 0 0 1 0 2H3a1 1 0 0 1-.133-1.991l-1.453-1.453a2 2 0 0 1 0-2.828L12.728 1.414a2 2 0 0 1 2.828 0L19.8 5.657a2 2 0 0 1 0 2.828L11.284 17z'/>
+                </svg>
+                Eraser
+            </button>
+            <div title="Eraser Size">
+                <label for="eraserSize">Eraser Size:</label>
+                <input type="range" id="eraserSize" name="eraserSize" min="1" max="20" value="10">
+            </div>
+        </div>
     </div>
 </div>
 
@@ -208,160 +225,129 @@
 </div>
 
 <script>
-    const canvas = document.getElementById('drawingCanvas');
-    const ctx = canvas.getContext('2d');
-    const brushSize = document.getElementById('brushSize');
-    const brushColor = document.getElementById('brushColor');
-    const canvasBgColor = document.getElementById('canvasBgColor');
-    const undoBtn = document.getElementById('undo');
-    const redoBtn = document.getElementById('redo');
-    const uploadImage = document.getElementById('uploadImage');
-    const downloadCanvas = document.getElementById('downloadCanvas');
-    const clearCanvas = document.getElementById('clearCanvas');
-    
+    const openSidebarBtn = document.getElementById("openSidebar");
+    const sidebar = document.getElementById("mySidebar");
+    const main = document.getElementById("main");
+
+    function openNav() {
+        sidebar.style.left = "0";
+        main.style.marginLeft = "333px";
+    }
+
+    function closeNav() {
+        sidebar.style.left = "-333px";
+        main.style.marginLeft = "0";
+    }
+
+    openSidebarBtn.addEventListener('click', openNav);
+    document.querySelector('.closebtn').addEventListener('click', closeNav);
+
+    const canvas = document.getElementById("drawingCanvas");
+    const ctx = canvas.getContext("2d");
+    let painting = false;
+    let brushSize = document.getElementById("brushSize").value;
+    let brushColor = document.getElementById("brushColor").value;
+    let canvasBgColor = document.getElementById("canvasBgColor").value;
+    const undoStack = [];
+    const redoStack = [];
+    let eraserSize = document.getElementById("eraserSize").value;
+    let eraserMode = false;
 
     canvas.width = window.innerWidth * 0.8;
     canvas.height = window.innerHeight * 0.6;
-    ctx.fillStyle = canvasBgColor.value;
+    ctx.fillStyle = canvasBgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    let drawing = false;
-    let history = [];
-    let historyStep = -1;
-    let redoHistory = [];
-
-    function addHistory() {
-        if (historyStep < history.length - 1) {
-            history = history.slice(0, historyStep + 1);
-        }
-        history.push(canvas.toDataURL());
-        historyStep++;
-        redoHistory = [];
-    }
-
-    function loadHistory(step) {
-        const img = new Image();
-        img.src = history[step];
-        img.onload = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0);
-        };
-    }
-
     function startPosition(e) {
-        drawing = true;
+        painting = true;
         draw(e);
     }
 
     function endPosition() {
-        if (drawing) {
-            drawing = false;
-            ctx.beginPath();
-            addHistory();
-        }
+        painting = false;
+        ctx.beginPath();
+        undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+        redoStack.length = 0;
     }
 
     function draw(e) {
-        if (!drawing) return;
-        ctx.lineWidth = brushSize.value;
+        if (!painting) return;
+
+        if (eraserMode) {
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.lineWidth = eraserSize;
+            ctx.strokeStyle = 'rgba(0,0,0,1)';
+        } else {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.lineWidth = brushSize;
+            ctx.strokeStyle = brushColor;
+        }
+
         ctx.lineCap = 'round';
-        ctx.strokeStyle = brushColor.value;
-        const rect = canvas.getBoundingClientRect();
-        ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.lineJoin = 'round';
+
+        ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
         ctx.stroke();
         ctx.beginPath();
-        ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
     }
 
-    function openNav() {
-        document.getElementById("mySidebar").style.left = "0";
-        document.getElementById("main").style.marginLeft = "250px";
-        canvas.width = window.innerWidth * 0.6;
-        canvas.height = window.innerHeight * 0.6;
-        loadHistory(historyStep);
-    }
+    canvas.addEventListener("mousedown", startPosition);
+    canvas.addEventListener("mouseup", endPosition);
+    canvas.addEventListener("mousemove", draw);
 
-    function closeNav() {
-        document.getElementById("mySidebar").style.left = "-250px";
-        document.getElementById("main").style.marginLeft = "0";
-        canvas.width = window.innerWidth * 0.8;
-        canvas.height = window.innerHeight * 0.6;
-        loadHistory(historyStep);
-    }
-
-    function undo() {
-        if (historyStep > 0) {
-            historyStep--;
-            loadHistory(historyStep);
-        }
-    }
-
-    function redo() {
-        if (historyStep < history.length - 1) {
-            historyStep++;
-            loadHistory(historyStep);
-        }
-    }
-
-    function uploadImg(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const img = new Image();
-            img.onload = function() {
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                addHistory();
-            };
-            img.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-
-    function download() {
-        const link = document.createElement('a');
-        link.download = 'drawing.png';
-        link.href = canvas.toDataURL();
-        link.click();
-    }
-
-    function clear() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = canvasBgColor.value;
+    document.getElementById("brushSize").addEventListener("input", (e) => brushSize = e.target.value);
+    document.getElementById("brushColor").addEventListener("input", (e) => brushColor = e.target.value);
+    document.getElementById("canvasBgColor").addEventListener("input", (e) => {
+        canvasBgColor = e.target.value;
+        ctx.fillStyle = canvasBgColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        addHistory();
-    }
-
-    canvas.addEventListener('mousedown', startPosition);
-    canvas.addEventListener('mouseup', endPosition);
-    canvas.addEventListener('mousemove', draw);
-
-    brushSize.addEventListener('change', () => ctx.lineWidth = brushSize.value);
-    brushColor.addEventListener('change', () => ctx.strokeStyle = brushColor.value);
-    canvasBgColor.addEventListener('change', () => {
-        ctx.fillStyle = canvasBgColor.value;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        addHistory();
     });
-    undoBtn.addEventListener('click', undo);
-    redoBtn.addEventListener('click', redo);
-    uploadImage.addEventListener('change', uploadImg);
-    downloadCanvas.addEventListener('click', download);
-    clearCanvas.addEventListener('click', clear);
-
-    document.getElementById("openSidebar").addEventListener('click', openNav);
-    document.querySelector('.closebtn').addEventListener('click', closeNav);
-
-    window.addEventListener('resize', () => {
-        if (document.getElementById("mySidebar").style.left === "0px") {
-            canvas.width = window.innerWidth * 0.6;
-        } else {
-            canvas.width = window.innerWidth * 0.8;
+    document.getElementById("uploadImage").addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+                ctx.drawImage(img, 0, 0);
+            }
+            img.src = event.target.result;
         }
-        canvas.height = window.innerHeight * 0.6;
-        loadHistory(historyStep);
+        reader.readAsDataURL(file);
+    });
+
+    document.getElementById("eraserSize").addEventListener("input", (e) => eraserSize = e.target.value);
+    document.getElementById("eraserToggle").addEventListener("click", () => {
+        eraserMode = !eraserMode;
+        document.getElementById("eraserToggle").style.backgroundColor = eraserMode ? "#f00" : "#4CAF50";
+    });
+    document.getElementById("undo").addEventListener("click", () => {
+        if (undoStack.length > 0) {
+            redoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+            ctx.putImageData(undoStack.pop(), 0, 0);
+        }
+    });
+    document.getElementById("redo").addEventListener("click", () => {
+        if (redoStack.length > 0) {
+            undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+            ctx.putImageData(redoStack.pop(), 0, 0);
+        }
+    });
+    document.getElementById("clearCanvas").addEventListener("click", () => {
+        if (confirm("Are you sure you want to clear the canvas?")) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = canvasBgColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            undoStack.length = 0;
+            redoStack.length = 0;
+        }
+    });
+    document.getElementById("downloadCanvas").addEventListener("click", () => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL();
+        link.download = 'drawing.png';
+        link.click();
     });
 </script>
-
 </body>
 </html>
