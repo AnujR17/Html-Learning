@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML tags Implementation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #34495e;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 10px;
+        }
+
+        .progress-bar {
+            width: 70%;
+            height: 20px;
+            background-color: #4caf50;
+            border-radius: 10px;
+        }
+
+        q {
+            quotes: "“" "”" "‘" "’";
+            font-style: italic;
+            display: block;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+
+        .ruby-example {
+            font-size: 20px;
+        }
+
+        ruby {
+            position: relative;
+            display: inline-block;
+            padding: 2px 5px;
+            background-color: #e8e8e8;
+        }
+
+        rt {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -1.5em;
+            font-size: 12px;
+            text-align: center;
+            color: #333;
+        }
+
+        samp {
+            font-family: monospace;
+            background-color: #e8e8e8;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-left: 5px solid #34495e;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        tfoot {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        time {
+            font-style: italic;
+            color: #555;
+        }
+
+        var {
+            font-family: "Courier New", Courier, monospace;
+            color: #d9534f;
+        }
+
+        video {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .download-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .download-section select {
+            margin-right: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .slot-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+
+        .slot-example::slotted(span) {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .source-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .source-container picture img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .search-container {
+            margin-top: 20px;
+        }
+
+        .search-container form {
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-container input[type="search"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .search-container input[type="submit"] {
+            background-color: #34495e;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome</h1>
+    </header>
+
+    <main>
+        <section id="intro">
+            <h2>About This Page</h2>
+            <p>This page demonstrates the use of a variety of HTML tags, both standard and experimental.</p>
+            <p>Here’s a quote to get started:</p>
+            <q>The only way to do great work is to love what you do. – Steve Jobs</q>
+        </section>
+
+        <section id="features">
+            <h2>Key Features</h2>
+            <article>
+                <h3>Progress Bar Example</h3>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                <p>The progress bar above shows 70% completion.</p>
+            </article>
+
+            <article>
+                <h3>Ruby Annotation Example</h3>
+                <p class="ruby-example">The word <ruby>漢字<rt>kanji</rt></ruby> is a Japanese script.</p>
+            </article>
+
+            <article>
+                <h3>Preformatted Text Example</h3>
+                <pre>
+Here is some code:
+<code>
+function helloWorld() {
+    console.log('Hello, World!');
+}
+</code>
+                </pre>
+            </article>
+
+            <article>
+                <h3>Table Example</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Occupation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>29</td>
+                            <td>Software Engineer</td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>34</td>
+                            <td>Data Scientist</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Total: 2 people</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </article>
+
+            <article>
+                <h3>Use of the <var>&lt;var&gt;</var> Tag</h3>
+                <p>Let’s define a variable: <var>x</var> = 10.</p>
+            </article>
+
+            <article>
+                <h3>Video Embed Example</h3>
+                <video controls>
+                    <source src="./asset/sample.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </article>
+
+            <article>
+                <h3>Time Element Example</h3>
+                <p>This event took place on <time datetime="2024-08-10">August 10, 2024</time>.</p>
+            </article>
+
+            <article>
+                <h3>Download Section</h3>
+                <div class="download-section">
+                    <select>
+                        <option value="pdf">PDF</option>
+                        <option value="epub">ePub</option>
+                        <option value="mobi">Mobi</option>
+                    </select>
+                    <button>Download</button>
+                </div>
+            </article>
+
+            <article>
+                <h3>Slot Example</h3>
+                <div class="slot-container">
+                    <template id="my-template">
+                        <slot name="content"></slot>
+                    </template>
+                    <p>This is an example of a slot:</p>
+                    <div class="slot-example">
+                        <span slot="content">This content is injected using the &lt;slot&gt; element.</span>
+                    </div>
+                </div>
+            </article>
+
+            <article>
+                <h3>Responsive Image Example</h3>
+                <div class="source-container">
+                    <picture>
+                        <source srcset="./asset/large.jpg" media="(min-width: 800px)">
+                        <source srcset="./asset/medium.jpg" media="(min-width: 400px)">
+                        <img src="./asset/small.jpg" alt="Example image">
+                    </picture>
+                    <p>This image adjusts based on screen size using the &lt;picture&gt; element.</p>
+                </div>
+            </article>
+
+            <article>
+                <h3>Search Example</h3>
+                <div class="search-container">
+                    <form action="#" method="get">
+                        <input type="search" placeholder="Search...">
+                        <input type="submit" value="Search">
+                    </form>
+                </div>
+            </article>
+        </section>
+
+        
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Anuj Rai. Image rights to their respective owners</p>
+    </footer>
+</body>
+</html>

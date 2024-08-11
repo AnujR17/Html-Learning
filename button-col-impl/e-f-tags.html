@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Tags Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .example {
+            margin-bottom: 40px;
+        }
+        .example h2 {
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+        iframe, embed {
+            width: 100%;
+            height: 300px;
+        }
+        ins {
+            text-decoration: none;
+            background-color: #d4edda;
+        }
+        em {
+            font-style: italic;
+            color: #555;
+        }
+        i {
+            font-style: italic;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="example">
+        <h2>Emphasized Text Example</h2>
+        <p>This is a sentence with some <em>emphasized text</em> to highlight its importance.</p>
+    </div>
+
+    <div class="example">
+        <h2>Embed Tag Example</h2>
+        <embed src="./asset/sample.mp4" type="video/mp4">
+        <p>The <code>&lt;embed&gt;</code> tag is used to embed external content, like videos or interactive elements, directly into the webpage.</p>
+    </div>
+
+    <div class="example">
+        <h2>Fencedframe (Experimental) Tag Example</h2>
+        <fencedframe>
+            <iframe src="https://html-experiments-anuj.netlify.app"></iframe>
+        </fencedframe>
+    </div>
+
+    <div class="example">
+        <h2>Fieldset and Legend Example</h2>
+        <form>
+            <fieldset>
+                <legend>Personal Information</legend>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name"><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+            </fieldset>
+        </form>
+        <p>The <code>&lt;fieldset&gt;</code> tag groups related elements in a form, often with a <code>&lt;legend&gt;</code> to describe the grouped content.</p>
+    </div>
+
+    <div class="example">
+        <h2>Figure and Figcaption Example</h2>
+        <figure>
+        <img src="./asset/small.jpg"alt="Example Image" height="350" widght="350">
+            <figcaption>An example image with a caption below it.</figcaption>
+        </figure>
+        <p>The <code>&lt;figure&gt;</code> tag groups media content and the <code>&lt;figcaption&gt;</code> provides a caption for that content.</p>
+    </div>
+
+    <div class="example">
+        <h2>Footer Tag Example</h2>
+        <footer>
+            <p>© 2024 My Website. All rights reserved.</p>
+            <p>Contact us: info@example.com</p>
+        </footer>
+        <p>The <code>&lt;footer&gt;</code> tag defines the footer for a section or page, usually containing contact info or copyright details.</p>
+    </div>
+
+    <div class="example">
+        <h2>Form and Input Example</h2>
+        <form action="/submit" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username"><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br><br>
+            <input type="submit" value="Login">
+        </form>
+        <p>Forms collect user input, with <code>&lt;input&gt;</code> fields for data entry.</p>
+    </div>
+
+    <div class="example">
+        <h2>Ins Tag Example</h2>
+        <p>This sentence has <ins>newly inserted text</ins> that has been added to the document.</p>
+        <p>The <code>&lt;ins&gt;</code> tag represents text that has been inserted into a document, useful for tracking changes.</p>
+    </div>
+
+    <div class="example">
+        <h2>Italic Tag Example</h2>
+        <p>This is a sentence with <i>italic text</i> to show styling without added emphasis.</p>
+    </div>
+
+    <div class="example">
+        <h2>IFrame Example</h2>
+        <iframe src="https://html-experiments-anuj.netlify.app/e-f-tags.html"></iframe>
+        <p>The <code>&lt;iframe&gt;</code> tag embeds another HTML page within the current document, useful for integrating external content like maps, videos, or entire websites.</p>
+    </div>
+
+    <div class="example">
+        <h2>Horizontal Rule Example</h2>
+        <p>Content above the horizontal rule.</p>
+        <hr>
+        <p>Content below the horizontal rule.</p>
+        <p>The <code>&lt;hr&gt;</code> tag creates a thematic break or divider, often used to separate content.</p>
+    </div>
+
+    <div class="example">
+        <h2>HTML Structure Example</h2>
+        <p>This document starts with a <code>&lt;!DOCTYPE html&gt;</code> declaration, followed by the <code>&lt;html&gt;</code> element that wraps everything. The <code>&lt;head&gt;</code> contains metadata and links to styles, while the <code>&lt;body&gt;</code> contains the content.</p>
+    </div>
+
+    <div class="example">
+        <h2>Header Tag Example</h2>
+        <header>
+            <h1>Welcome to My Website</h1>
+            <nav>
+                <a href="index.html">Home</a> |
+                <a href="about-us.html">About</a> |
+                <a href="contact.html">Contact</a>
+            </nav>
+        </header>
+        <p>The <code>&lt;header&gt;</code> tag represents introductory content or a set of navigational links, usually at the top of a page.</p>
+    </div>
+
+    <div class="example">
+        <h2>Heading Group Example</h2>
+        <hgroup>
+            <h1>Page Title</h1>
+            <h2>Subtitle of the Page</h2>
+        </hgroup>
+        <p>The <code>&lt;hgroup&gt;</code> tag groups a set of headings (e.g., <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>) when a page or section has multiple headings.</p>
+    </div>
+</body>
+</html>

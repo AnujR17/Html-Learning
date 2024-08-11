@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Tags Showcase</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f3f3f3; 
+        color: #333; 
+    }
+    
+    /* Navigation Bar */
+    .navbar {
+        background-color: #4a90e2; 
+        padding: 15px;
+        text-align: center;
+    }
+    
+    .nav-items {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nav-items li {
+        display: inline;
+        margin: 0 15px;
+    }
+    
+    .nav-items a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .nav-items a:hover {
+        color: #f5c500; 
+    }
+    
+    /* Sidebar Toggle Button */
+    .sidebar-toggle {
+        position: absolute;
+        top: -3px;
+        left: 15px;
+        background-color: #4a90e2; 
+        color: #fff;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1000;
+        border-radius: 5px;
+    }
+    
+    .sidebar-toggle span {
+        font-size: 24px;
+    }
+    
+    /* Side Navigation */
+    .side-nav {
+        position: fixed;
+        top: 56px;
+        left: -250px;
+        width: 250px;
+        background-color: #e1e1e1;
+        padding-top: 20px;
+        height: 100%;
+        transition: left 0.3s ease;
+        z-index: 999;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .side-nav.open {
+        left: 0;
+    }
+    
+    .side-nav ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .side-nav ul li a {
+        color: #333;
+        padding: 10px;
+        text-decoration: none;
+        display: block;
+        padding-left: 30px;
+    }
+    
+    .side-nav ul li a:hover {
+        background-color: #4a90e2; 
+        color: #fff;
+    }
+
+    .footer {
+        background: #1a3758; 
+        color: #ffffff;
+        text-align: center;
+        padding: 20px 0;
+        border-top: 1px solid #4a90e2; 
+    }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+        .example {
+            margin-bottom: 40px;
+        }
+        .example h2 {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .example p {
+            margin: 10px 0;
+        }
+        .example ul, .example ol {
+            padding-left: 20px;
+        }
+        .example label, .example input, .example button {
+            display: block;
+            margin: 10px 0;
+        }
+        .example textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+        }
+        .example .form-group {
+            margin-bottom: 20px;
+        }
+        .example .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .example .form-group input, .example .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .example .map-container {
+            position: relative;
+            height: 300px;
+            border: 1px solid #ddd;
+            background-color: #e9ecef;
+        }
+        .example .map-container img {
+            width: 100%;
+            height: 100%;
+        }
+        .example kbd {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-items">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="./about-us.html">About Me</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sidebar Toggle Button -->
+    <div class="sidebar-toggle" id="sidebarToggle">
+        <span>&#9776;</span> <!-- Hamburger Icon -->
+    </div>
+
+    <!-- Side Navigation for HTML Tags -->
+    <aside class="side-nav" id="sideNav">
+        <ul>
+            <li><a href="anchor.html"> Anchor Tag</a></li>
+            <li><a href="abbr.html">Abbreviations</a></li>
+            <li><a href="area-map.html">Area</a></li>
+            <li><a href="misc.html">BDO-BDI</a></li>
+            <li><a href="table.html">Col</a></li>
+            <li><a href="d-tags.html">D-tags</a></li>
+            <li><a href="div.html">Div</a></li>
+            <li><a href="signup.html">Form</a></li>
+            <li><a href="e-f-tags.html"> Embded-iframe-Header </a></li>
+            <li><a href="k-o.html">Link-Map-Ol</a></li>
+            <li><a href="p-x.html">P-X-Tags</a></li>
+        </ul>
+    </aside>
+    <div class="container">
+        <h1>HTML Tags Showcase</h1>
+
+        <!-- KBD Tag Example -->
+        <div class="example">
+            <h2>KBD Tag Example</h2>
+            <p>Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy the text.</p>
+        </div>
+
+        <!-- Label and Legend Tags Example -->
+        <div class="example">
+            <h2>Label and Legend Tag Example</h2>
+            <form>
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email">
+                    </div>
+                </fieldset>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Link Tag Example -->
+        <div class="example">
+            <h2>Link Tag Example</h2>
+            <p>Visit <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element" target="_blank">MDN website</a> for more information.</p>
+        </div>
+
+        <!-- Main Tag Example -->
+        <div class="example">
+            <h2>Main Tag Example</h2>
+            <main>
+                <h2>Welcome to Our Main Content</h2>
+                <p>This section is the primary content of the page, separate from headers, footers, and sidebars.</p>
+            </main>
+        </div>
+
+        <!-- Mark Tag Example -->
+        <div class="example">
+            <h2>Mark Tag Example</h2>
+            <p>Highlight important sections of text using the <mark>mark</mark> tag.</p>
+        </div>
+
+        <!-- Menu Tag Example -->
+        <div class="example">
+            <h2>Menu Tag Example</h2>
+            <menu>
+                <button>New</button>
+                <button>Open</button>
+                <button>Save</button>
+            </menu>
+            <p>The <code>&lt;menu&gt;</code> tag can be used to group related commands or actions.</p>
+        </div>
+
+        <!-- Meta Tag Example -->
+        <div class="example">
+            <h2>Meta Tag Example</h2>
+            <p>The <code>&lt;meta&gt;</code> tag is used within the <code>&lt;head&gt;</code> section of the document for metadata, such as character encoding or viewport settings.</p>
+        </div>
+
+        <!-- Meter Tag Example -->
+        <div class="example">
+            <h2>Meter Tag Example</h2>
+            <p>Progress: <meter value="0.6" min="0" max="1">60%</meter></p>
+            <p>The <code>&lt;meter&gt;</code> tag represents a scalar value within a known range, like a progress indicator.</p>
+        </div>
+
+        <!-- Nav Tag Example -->
+        <div class="example">
+            <h2>Nav Tag Example</h2>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about-us.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <p>The <code>&lt;nav&gt;</code> tag defines navigation links, typically used for main menu items.</p>
+        </div>
+
+        <!-- Noscript Tag Example -->
+        <div class="example">
+            <h2>Noscript Tag Example</h2>
+            <noscript>
+                <p>Your browser does not support JavaScript or it is disabled. Some features may not be available.</p>
+            </noscript>
+            <p>The <code>&lt;noscript&gt;</code> tag provides alternative content for users who have JavaScript disabled or unsupported browsers.</p>
+        </div>
+
+        <!-- Ol, Optgroup, Option, Output Example -->
+        <div class="example">
+            <h2>Ol, Optgroup, Option, Output Example</h2>
+            <form>
+                <label for="food">Choose a food item:</label>
+                <select id="food" name="food">
+                    <optgroup label="Fruits">
+                        <option value="apple">Apple</option>
+                        <option value="orange">Orange</option>
+                    </optgroup>
+                    <optgroup label="Vegetables">
+                        <option value="carrot">Carrot</option>
+                        <option value="broccoli">Broccoli</option>
+                    </optgroup>
+                </select>
+                <br><br>
+                <button type="button" onclick="displaySelection()">Submit</button>
+            </form>
+            <p id="result">Selected food will be displayed here.</p>
+            <script>
+                function displaySelection() {
+                    const food = document.getElementById('food').value;
+                    document.getElementById('result').textContent = `You selected: ${food}`;
+                }
+            </script>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Anuj Rai. Image rights to their respective owners</p>
+    </footer>
+    <script>
+        document.getElementById("sidebarToggle").addEventListener("click", function() {
+            document.getElementById("sideNav").classList.toggle("open");
+            document.getElementById("mainContent").classList.toggle("sidebar-open");
+        });
+    </script>
+
+</body>
+</html>

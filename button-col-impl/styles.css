@@ -1,0 +1,330 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3; 
+    color: #333; 
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #4a90e2; 
+    padding: 15px;
+    text-align: center;
+}
+
+.nav-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-items li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.nav-items a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-items a:hover {
+    color: #f5c500; 
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+    position: absolute;
+    top: -3px;
+    left: 15px;
+    background-color: #4a90e2; 
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000;
+    border-radius: 5px;
+}
+
+.sidebar-toggle span {
+    font-size: 24px;
+}
+
+/* Side Navigation */
+.side-nav {
+    position: fixed;
+    top: 56px;
+    left: -250px;
+    width: 250px;
+    background-color: #e1e1e1;
+    padding-top: 20px;
+    height: 100%;
+    transition: left 0.3s ease;
+    z-index: 999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.side-nav.open {
+    left: 0;
+}
+
+.side-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.side-nav ul li a {
+    color: #333;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    padding-left: 30px;
+}
+
+.side-nav ul li a:hover {
+    background-color: #4a90e2; 
+    color: #fff;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+/* Adjust margin when sidebar is open */
+main.sidebar-open {
+    margin-left: 250px;
+}
+
+/* Project Cards */
+.projects-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.project-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    margin: 20px 0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    width: 80%;
+    max-width: 1000px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+}
+
+.project-card img {
+    width: 350px; 
+    height: 200px;
+    border-radius: 8px;
+    margin-right: 20px; 
+}
+
+.project-content {
+    text-align: left;
+    flex: 1;
+}
+
+.project-card h2 {
+    margin-top: 0;
+}
+
+.project-card p {
+    margin: 15px 0;
+}
+
+.project-card .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #4a90e2; 
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.project-card .btn:hover {
+    background-color: #357ABD; 
+}
+
+/* About Section */
+.about-section {
+    background-color: #ffffff; 
+    color: #000000;
+    padding: 40px 20px;
+    text-align: left;
+    border-radius: 15px;
+}
+
+.about-section h2 {
+    margin-bottom: 20px;
+}
+
+.about-section .social-links a {
+    margin: 0 10px;
+    color: #f5c500; 
+    text-decoration: none;
+}
+
+.about-section .social-links a:hover {
+    color: #4a90e2;
+}
+
+/* Header Section */
+.header {
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+}
+
+.header.about {
+    background-image: url('https://img.freepik.com/free-photo/laptop-coffee-cup-with-stationeries-brown-desktop_23-2147979162.jpg?t=st=1723280829~exp=1723284429~hmac=60ec2659487139408a0090c4274defa32823554340d1bd2d2aba540364b4b131&w=1480'); /* Image for About page */
+}
+
+.header.contact {
+    background-image: url('./asset/smallheader.jpg');
+}
+
+.header h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+
+/* About Page Specific */
+.about-container {
+    display: flex;
+    max-width: 1200px;
+    align-items: center;
+    padding: 50px 20px;
+    margin: 0 auto;
+}
+
+.about-image img {
+    width: 300px;
+    height: 300px;
+    margin-right: 70px;
+}
+
+.about-text h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    font-size: 1.2em;
+    line-height: 1.5;
+} 
+
+
+.social-links {
+    margin-top: 20px;
+}
+
+/* Contact Page Specific */
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+.resume-embed {
+    margin-bottom: 40px;
+}
+
+.contact-form h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form input[type="submit"] {
+    background-color: #4a90e2; 
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+.contact-form input[type="submit"]:hover {
+    background-color: #357ABD; 
+}
+
+/* My Learning Section */
+.my-learning-section {
+    background-color: #4a90e2; 
+    padding: 20px 20px;
+    margin-bottom: 40px;
+    margin-top: -45px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.my-learning-section .my-learning-container{
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.my-learning-section p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #ffffff;
+    text-align: justify;
+}
+.my-learning-section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #ffffff;
+  
+}
+.my-learning-section a {
+    color: #f5c500; 
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.my-learning-section a:hover {
+    text-decoration: underline;
+    color: #000000;
+}
+
+
+/* Footer */
+.footer {
+    background: #1a3758; 
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #4a90e2; 
+}

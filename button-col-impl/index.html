@@ -1,98 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Tags Learning</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-        }
-        nav a {
-            margin: 0 10px;
-            color: #333;
-        }
-        
-        button, .download-button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        button:hover, .download-button:hover {
-            background-color: #45a049;
-        }
-        canvas {
-            border: 1px solid #ccc;
-            margin-bottom: 20px;
-        }
-
-    </style>
+    <title>Portfolio Homepage</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./asset/Group1.png" type="image/x-icon" />
 </head>
+
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul class="nav-items">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="./about-us.html">About Me</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
 
-<h1>HTML Tags Learning</h1>
+    <!-- Sidebar Toggle Button -->
+    <div class="sidebar-toggle" id="sidebarToggle">
+        <span>&#9776;</span> <!-- Hamburger Icon -->
+    </div>
 
-<nav>
-    <h2>
-    <a href="table.html">Table Example</a>
-    <a href="misc.html">Html Tags</a>
-    <a href="signup.html">Sign Up</a>
-    </h2>
-</nav>
+    <!-- Side Navigation for HTML Tags -->
+    <aside class="side-nav" id="sideNav">
+        <ul>
+            <li><a href="anchor.html"> Anchor Tag</a></li>
+            <li><a href="abbr.html">Abbreviations</a></li>
+            <li><a href="area-map.html">Area</a></li>
+            <li><a href="misc.html">BDO-BDI</a></li>
+            <li><a href="table.html">Col</a></li>
+            <li><a href="d-tags.html">D-tags</a></li>
+            <li><a href="div.html">Div</a></li>
+            <li><a href="signup.html">Form</a></li>
+            <li><a href="e-f-tags.html"> Embded-iframe-Header </a></li>
+            <li><a href="k-o.html">Link-Map-Ol</a></li>
+            <li><a href="p-x.html">P-X-Tags</a></li>
+        </ul>
+    </aside>
 
-<center>
-    <h2>Canvas Example</h2>
-    <p>Draw Something</p>
-    <br />
-    <canvas id="drawingCanvas" width="800" height="400"></canvas>
-    <br>
-    <a id="downloadCanvas" class="download-button" download="canvas.png">Download</a>
-    <button id="clearCanvas">Clear</button>
-</center>
+    <!-- Main Content -->
+    <main>
+       <!-- Projects Section -->
+        
+<section id="projects" class="projects-section">
+    <div class="project-card">
+        <img src="./asset/map.png" alt="Area Map Preview">
+        <div class="project-content">
+            <h2>Area Map with Tags</h2>
+            <p> Interactive maps with clickable states for both the US and India using area tags</p>
+            <a href="area-map.html" class="btn">View Project</a>
+        </div>
+    </div>
+    <div class="project-card">
+        <img src="./asset/canvas.png" alt="Canvas Drawing Board Preview">
+        <div class="project-content">
+            <h2>Canvas Drawing Board</h2>
+            <p> A fully functional drawing board featuring tools like drawing, eraser, background customization, undo-redo and download.</p>
+            <a href="draw.html" class="btn">View Project</a>
+        </div>
+    </div>
+    <div class="project-card">
+        <img src="./asset/sonywh1000.jpg" alt="Product Page Preview">
+        <div class="project-content">
+            <h2>Product Page</h2>
+            <p>A detailed earphone product page with an embedded video, list elements, and a contact info form, utilizing various helpful HTML tags.</p>
+            <a href="product-page.html" class="btn">View Project</a>
+        </div>
+    </div>
+    <div class="project-card">
+        <img src="./asset/lib.png" alt="Library Page Preview">
+        <div class="project-content">
+            <h2>Library Book Pages</h2>
+            <p>A book showcase with rating, description, purchase options, sample downloads, and a simple review form, and embedded maps for contact info.</p>
+            <a href="lib.html" class="btn">View Project</a>
+        </div>
+    </div>
+</section>
+</main>
+<section id="my-learning" class="my-learning-section">
+    <div class="my-learning-container">
+        <h2>My HTML Learning</h2>
+        <p>I've learned a lot about HTML tags from the 
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element" target="_blank">MDN website</a>, 
+        and I've used those learnings to build this project. Each tag was applied in a practical way, like creating project cards, 
+        a functional sidebar, and a responsive layout. This hands-on approach really helped me understand how these tags work together 
+        to create a fully functional website.
+        </p>
+        <p>In my exploration of HTML, I’ve delved deep into both fundamental and advanced concepts to create a seamless and engaging 
+        web experience. By leveraging HTML’s semantic elements, like <code>&lt;area&gt;</code>, <code>&lt;section&gt;</code>, 
+        and <code>&lt;aside&gt;</code>. I implemented uncommon yet powerful features like the <code>&lt;details&gt;</code> and <code>&lt;output&gt;</code> 
+        tags to enhance interactivity. My learning extends to embracing the subtleties of HTML, 
+        from handling forms with precision to understanding the quirks of HTML5 input types.
+        </p>
+    </div>
+</section>
+      
+  
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Anuj Rai. Image rights to their respective owners</p>
+    </footer>
 
-<script>
-    const canvas = document.getElementById('drawingCanvas');
-    const ctx = canvas.getContext('2d');
-    let drawing = false;
-
-    canvas.addEventListener('mousedown', () => drawing = true);
-    canvas.addEventListener('mouseup', () => drawing = false);
-    canvas.addEventListener('mousemove', draw);
-
-    function draw(event) {
-        if (!drawing) return;
-        ctx.lineWidth = 5;
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = 'black';
-
-        ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-    }
-
-    document.getElementById('clearCanvas').addEventListener('click', () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.beginPath();
-    });
-
-    document.getElementById('downloadCanvas').addEventListener('click', () => {
-        const link = document.createElement('a');
-        link.download = 'canvas-drawing.png';
-        link.href = canvas.toDataURL();
-        link.click();
-    });
-</script>
-
+    <script src="scripts.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Library of books with reviews and download options.">
+    <title>Library Catalog</title>
+    <link rel="icon" href="./asset/Group1.png" type="image/x-icon" />
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3; 
+    color: #333; 
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #4a90e2; 
+    padding: 15px;
+    text-align: center;
+}
+
+.nav-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-items li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.nav-items a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-items a:hover {
+    color: #f5c500; 
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+    position: absolute;
+    top: -3px;
+    left: 15px;
+    background-color: #4a90e2; 
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000;
+    border-radius: 5px;
+}
+
+.sidebar-toggle span {
+    font-size: 24px;
+}
+
+/* Side Navigation */
+.side-nav {
+    position: fixed;
+    top: 56px;
+    left: -250px;
+    width: 250px;
+    background-color: #e1e1e1;
+    padding-top: 20px;
+    height: 100%;
+    transition: left 0.3s ease;
+    z-index: 999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.side-nav.open {
+    left: 0;
+}
+
+.side-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.side-nav ul li a {
+    color: #333;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    padding-left: 30px;
+}
+
+.side-nav ul li a:hover {
+    background-color: #4a90e2; 
+    color: #fff;
+}
+
+
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-top: 20px;
+        }
+
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .book {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .book img {
+            display: block;
+            margin-right: 20px;
+        }
+
+        .book-details {
+            flex: 1;
+        }
+
+        .star-rating {
+            direction: rtl;
+            font-size: 2rem;
+            display: inline-flex;
+            justify-content: center;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            color: #ddd;
+            cursor: pointer;
+            padding: 0 0.1rem;
+        }
+
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: gold;
+        }
+
+        .buy-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .buy-options select {
+            padding: 10px;
+            border: 1px solid #2c3e50;
+            border-radius: 5px;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .buy-options select:hover {
+            background-color: #34495e;
+            color: #ccc;
+        }
+
+        .buy-options button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            cursor: pointer;
+        }
+
+        .buy-options button:hover {
+            background-color: #34495e;
+        }
+
+        h2 {
+            border-bottom: 2px solid #34495e;
+            padding-bottom: 10px;
+        }
+
+        .contact-us {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .contact-info {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .contact-info address {
+            margin: 0;
+            font-style: normal;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+        }
+
+        .map-container {
+            flex: 2;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            height: 400px;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        noscript {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border: 1px solid #f5c6cb;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .review-form {
+            margin-top: 20px;
+        }
+
+        .review-form input, .review-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .review-form button {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .review-form button:hover {
+            background-color: #34495e;
+        }
+
+        .footer {
+    background: #1a3758; 
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #4a90e2; 
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-items">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="./about-us.html">About Me</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sidebar Toggle Button -->
+    <div class="sidebar-toggle" id="sidebarToggle">
+        <span>&#9776;</span> <!-- Hamburger Icon -->
+    </div>
+
+    <!-- Side Navigation for HTML Tags -->
+    <aside class="side-nav" id="sideNav">
+        <ul>
+            <li><a href="anchor.html"> Anchor Tag</a></li>
+            <li><a href="abbr.html">Abbreviations</a></li>
+            <li><a href="area-map.html">Area</a></li>
+            <li><a href="misc.html">BDO-BDI</a></li>
+            <li><a href="table.html">Col</a></li>
+            <li><a href="d-tags.html">D-tags</a></li>
+            <li><a href="div.html">Div</a></li>
+            <li><a href="signup.html">Form</a></li>
+            <li><a href="e-f-tags.html"> Embded-iframe-Header </a></li>
+            <li><a href="k-o.html">Link-Map-Ol</a></li>
+            <li><a href="p-x.html">P-X-Tags</a></li>
+        </ul>
+    </aside>
+    <header>
+        
+        <h1>ShelfSpace Library</h1>
+    </header>
+    
+    <main>
+        <section id="catalog">
+            <h2>Featured Books</h2>
+            
+            <div class="book">
+                <img src="./asset/gof.png" alt="Book Title 1" width="250">
+                <div class="book-details">
+                    <h1>Design Patterns: Elements of Reusable Object-Oriented Software</h1>
+                    <p>Author: Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides</p>
+                    <p><mark>Genre: Software Engineering</mark></p>
+                    <p>Description: This book, commonly known as the "Gang of Four" book, is a foundational text in software engineering. It introduces 23 classic software design patterns and provides practical advice on object-oriented design.</p>
+                    <p><a href="asset/sample.pdf" download="" target="_blank">Download Sample PDF</a></p>
+                    <div class="star-rating">
+                        <input type="radio" name="rating1" id="rating1-5" value="5"><label for="rating1-5">&#9733;</label>
+                        <input type="radio" name="rating1" id="rating1-4" value="4" checked><label for="rating1-4">&#9733;</label>
+                        <input type="radio" name="rating1" id="rating1-3" value="3"><label for="rating1-3">&#9733;</label>
+                        <input type="radio" name="rating1" id="rating1-2" value="2"><label for="rating1-2">&#9733;</label>
+                        <input type="radio" name="rating1" id="rating1-1" value="1"><label for="rating1-1">&#9733;</label>
+                    </div>
+                    <div class="buy-options">
+                        <select>
+                            <option value="hardcover">Hardcover</option>
+                            <option value="paperback">Paperback</option>
+                            <option value="ebook">Ebook</option>
+                        </select>
+                        <button>Buy</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book">
+                <img src="./asset/cleanCode.png" alt="Book Title 2" width="250">
+                <div class="book-details">
+                    <h1>Clean Code: A Handbook of Agile Software Craftsmanship</h1>
+                    <p>Author: Robert C. Martin</p>
+                    <p><mark>Genre: Software Development</mark></p>
+                    <p>Description: Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn't have to be that way.</p>
+                    <p><a href="sample.pdf" download="" target="_blank">Download Sample PDF</a></p>
+                    <div class="star-rating">
+                        <input type="radio" name="rating2" id="rating2-5" value="5" checked><label for="rating2-5">&#9733;</label>
+                        <input type="radio" name="rating2" id="rating2-4" value="4"><label for="rating2-4">&#9733;</label>
+                        <input type="radio" name="rating2" id="rating2-3" value="3"><label for="rating2-3">&#9733;</label>
+                        <input type="radio" name="rating2" id="rating2-2" value="2"><label for="rating2-2">&#9733;</label>
+                        <input type="radio" name="rating2" id="rating2-1" value="1"><label for="rating2-1">&#9733;</label>
+                    </div>
+                    <div class="buy-options">
+                        <select>
+                            <option value="hardcover">Hardcover</option>
+                            <option value="paperback">Paperback</option>
+                            <option value="ebook">Ebook</option>
+                        </select>
+                        <button>Buy</button>
+                    </div>
+                </div>
+            </div>
+
+            <section id="reviews">
+                <h2>Leave Your Review</h2>
+                <form class="review-form" action="/submit-review" method="post">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="review-rating">Rating:</label>
+                    <div class="star-rating review-rating">
+                        <input type="radio" name="rating" id="review-rating-5" value="5"><label for="review-rating-5">&#9733;</label>
+                        <input type="radio" name="rating" id="review-rating-4" value="4"><label for="review-rating-4">&#9733;</label>
+                        <input type="radio" name="rating" id="review-rating-3" value="3"><label for="review-rating-3">&#9733;</label>
+                        <input type="radio" name="rating" id="review-rating-2" value="2"><label for="review-rating-2">&#9733;</label>
+                        <input type="radio" name="rating" id="review-rating-1" value="1"><label for="review-rating-1">&#9733;</label>
+                    </div><br />
+                    <label for="review">Review:</label>
+                    <textarea id="review" name="review" rows="4" required></textarea>
+                    <button type="submit">Submit Review</button>
+                </form>
+            </section>
+        </section>
+
+        <section id="contact-us">
+            <h2>Contact Us</h2>
+            <div class="contact-us">
+                <div class="contact-info">
+                    <address>
+                        <p><strong>Library Name:</strong> ShelfSpace Library</p>
+                        <p><strong>Address:</strong> G9, Mangalmurti Complex, Makarpura Rd, opposite Novino Battery, Vadodara, Gujarat 390010</p>
+                        <p><strong>Phone:</strong> +91 (985) 123-4567</p>
+                        <p><strong>Email:</strong> <a href="mailto:info@shelfspace.com">info@shelfspace.com</a></p>
+                    </address>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4843.9404354502585!2d73.19401964586841!3d22.251886547476897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc438ffffffff%3A0x14ce7d3de6976707!2sBango%20Circulating%20Library!5e0!3m2!1sen!2sin!4v1722773669829!5m2!1sen!2sin" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 ShelfSpace Library. All rights reserved to their respective owners.</p>
+        <noscript>
+            <p>JavaScript is required for some features of this page. Please enable JavaScript in your browser.</p>
+        </noscript>
+    </footer>
+    <script>
+        document.getElementById("sidebarToggle").addEventListener("click", function() {
+            document.getElementById("sideNav").classList.toggle("open");
+            document.getElementById("mainContent").classList.toggle("sidebar-open");
+        });
+    </script>
+</body>
+</html>
