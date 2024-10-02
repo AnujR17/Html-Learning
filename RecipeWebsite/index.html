@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street Bites - Delicious Indian Street Food Recipes</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Street Bites</h1>
+            <nav>
+                <button id="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul id="main-nav">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#featured-recipes">Recipes</a></li>
+                    <li><a href="#about-Us">About</a></li>
+                    <li><a href="#contact-Us">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h2>Discover Delicious Indian Street Food Recipes</h2>
+                <form class="search-form">
+                    <input type="search" id="search-input" placeholder="Search recipes..." aria-label="Search recipes">
+                    <button type="submit" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section id="featured-recipes" class="featured-recipes">
+            <div class="container">
+                <h3>Featured Street Food Recipes</h3>
+                <div class="recipe-grid" id="recipe-grid">
+                    <article class="recipe-cards">
+                        <img src="https://imgs.search.brave.com/_hgZGrizorU6S3lZLBhnSeve5rtnX_bu0UmsbZ2Faro/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTU5/NTgyNzkzL3Bob3Rv/L3BhYW5pLXB1cmku/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PUJUeGlZSnVjNmZz/VE5mLUVzazY0UGow/UHhITEdyQlhHT0l5/R0J2bHFmZ289" alt="Pani Puri" loading="lazy">
+                        <div class="recipe-content">
+                            <h4>Pani Puri</h4>
+                            <p>Crispy hollow puris filled with spicy tangy water, potatoes, and chickpeas.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 30 mins</span>
+                                <a href="recipe.html?id=pani-puri" class="Button">View Recipe</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="recipe-cards">
+                        <img src="https://imgs.search.brave.com/cJ5_CaO-tkW99PKw3ncQDYzUNt-OYO8FGJwCc2P2FhE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvNTM5/ODA2Njk4L3Bob3Rv/L25ldy1kZWxoaS1p/bmRpYS1qdW5lLTA4/LXZhZGEtcGF2LWp1/bmN0aW9uLXJlc3Rh/dXJhbnQtZmFtb3Vz/LXZhZGEtcGF2LWF0/LXNhdHlhLW5pa2V0/YW4taW4tbmV3Lmpw/Zz9zPTYxMng2MTIm/dz0wJms9MjAmYz1v/Tkpja3RydHJEdDN1/N1h3SmNTT1VWakw1/TGxoZzZKZ2NMMUlU/OWMtTVZBPQ" alt="Vada Pav" loading="lazy">
+                        <div class="recipe-content">
+                            <h4>Vada Pav</h4>
+                            <p>Spicy potato fritter in a soft bun with chutneys, Mumbai's favorite street food.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 40 mins</span>
+                                <a href="recipe.html?id=vada-pav" class="Button">View Recipe</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="recipe-cards">
+                        <img src="https://imgs.search.brave.com/-yTBxyx1oc9ZfWZZVCXVMxJl7bGPeyhzs9mhlNo65o0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTE1/NzY5ODc3Ny9waG90/by9iaGVsLXB1cmku/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PUQ4ZVV6N0VDM0dE/OU96QUhzNGJsU002/NzZmSnNIcWROU1hq/VzBVTXVZRTA9" alt="Bhel Puri" loading="lazy">
+                        <div class="recipe-content">
+                            <h4>Bhel Puri</h4>
+                            <p>A crunchy, tangy snack made with puffed rice, vegetables, and tamarind chutney.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 20 mins</span>
+                                <a href="recipe.html?id=bhel-puri" class="Button">View Recipe</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="recipe-cards">
+                        <img src="https://imgs.search.brave.com/JuvhgT5Tx6cDfq0UMUhdUO8LGTUNmjLiqFgt8xQgPes/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA3LzM5Lzk2LzIx/LzM2MF9GXzczOTk2/MjE0N19TcW4xS0lJ/UnpFOGNEb2hOWDJD/Y3V2TGxCc2xXVUdl/Ni5qcGc" alt="Aloo Tikki" loading="lazy">
+                        <div class="recipe-content">
+                            <h4>Aloo Tikki</h4>
+                            <p>Crispy potato patties served with various chutneys and spices.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 35 mins</span>
+                                <a href="recipe.html?id=aloo-tikki" class="Button">View Recipe</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="recipe-cards">
+                        <img src="https://imgs.search.brave.com/CvnfJv9ScDLFojWaa8uA1_QYVKTjjsQvmlxQ1H9x7Ko/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA0LzcwLzg5LzEy/LzM2MF9GXzQ3MDg5/MTI3MF9uUUpPZ1Za/TTRYZDdyTk8yc2xh/bkZpcjB0VGNtUzkw/ci5qcGc" alt="Pav Bhaji" loading="lazy">
+                        <div class="recipe-content">
+                            <h4>Pav Bhaji</h4>
+                            <p>A spicy mashed vegetable curry served with buttered bread rolls.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 45 mins</span>
+                                <a href="recipe.html?id=pav-bhaji" class="Button">View Recipe</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="recipe-cards">
+                        <img src="https://c8.alamy.com/comp/M4BDFM/indian-street-veg-roll-frankie-stuffed-with-vegetables-close-up-on-M4BDFM.jpg" alt="Frankie" loading="lazy">
+                        <div class="recipe-content">
+                            <h4>Frankie</h4>
+                            <p>Indian-style wrap filled with spicy potato or paneer, vegetables, and chutneys.</p>
+                            <div class="recipe-meta">
+                                <span>⏱️ 30 mins</span>
+                                <a href="recipe.html?id=frankie" class="Button">View Recipe</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-Us" class="about-Us">
+            <div class="container">
+                <h3>About Street Bites</h3>
+                <p>Street Bites brings the vibrant flavors of Indian street food right to your kitchen. Our curated collection features authentic recipes that capture the essence of India's bustling street food scene. Whether you're a seasoned cook or a curious foodie, our easy-to-follow recipes will help you recreate the magic of Indian street food at home.</p>
+            </div>
+        </section>
+
+        <section id="contact-Us" class="contact-Us">
+            <div class="container">
+                <h3>Contact Us</h3>
+                <form class="contact-Us-form" name="contact">
+                    <input type="hidden" name="form-name" value="contact">
+                    <input type="text" id="name" name="name" placeholder="Your Name">
+                    <input type="email" id="email" name="email" placeholder="Your Email">
+                    <textarea id="message" name="message" placeholder="Your Message"></textarea>
+                    <button type="submit" class="Button">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Street Bites. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
